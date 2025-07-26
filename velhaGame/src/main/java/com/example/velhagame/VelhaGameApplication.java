@@ -11,6 +11,7 @@ public class VelhaGameApplication extends Application {
 
     private static Stage janela;
 
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(VelhaGameApplication.class.getResource("menu.fxml"));
