@@ -10,12 +10,9 @@ import java.io.IOException;
 public class VelhaGameApplication extends Application {
 
     private static Stage janela;
-<<<<<<< Updated upstream
     private String cigar;
-=======
     private String nome;
     private String xique;
->>>>>>> Stashed changes
 
     @Override
     public void start(Stage stage) throws IOException {
