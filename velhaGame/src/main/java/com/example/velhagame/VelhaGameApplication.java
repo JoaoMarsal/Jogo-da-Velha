@@ -10,9 +10,7 @@ import java.io.IOException;
 public class VelhaGameApplication extends Application {
 
     private static Stage janela;
-    private String cigar;
-    private String nome;
-    private String xique;
+
 
     @Override
     public void start(Stage stage) throws IOException {
