@@ -8,10 +8,14 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 import javax.swing.*;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class JogoController {
@@ -20,10 +24,14 @@ public class JogoController {
     public TextField teste;
 
     public void change() {
-        int tableN = parseInt(teste.getText());
-        
-
-
-
+        float tableN = parseFloat(teste.getText());
+        double sizeC = (1/tableN) * tabuleiro.getWidth();
+        double sizeR = (1/tableN) * tabuleiro.getHeight();
+        ColumnConstraints column = new ColumnConstraints(sizeC);
+        RowConstraints row = new RowConstraints(sizeR);
+        for(int i = 0;i < (tableN - 1); i++) {
+            tabuleiro.getColumnConstraints().add(column);
+            tabuleiro.getRowConstraints().add(row);
+        };
     }
 }
