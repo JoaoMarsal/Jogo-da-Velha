@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javax.swing.*;
 
 import static java.lang.Integer.parseInt;
+
 public class JogoController {
     @FXML
     public GridPane tabuleiro;
