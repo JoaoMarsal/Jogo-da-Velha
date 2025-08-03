@@ -19,7 +19,7 @@
                   <VBox alignment="CENTER" prefHeight="277.0" prefWidth="273.0" spacing="20.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#abrirInicial" text="Iniciar" />
-                        <Button mnemonicParsing="false" text="Configurações" />
+                        <Button mnemonicParsing="false" text="Configurações" onAction="#abrirOpcoes"/>
                         <Button mnemonicParsing="false" text="Créditos" />
                      </children></VBox>
                   <VBox alignment="CENTER" prefHeight="317.0" prefWidth="309.0" style="-fx-border-color: red; -fx-border-width: 5;">

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.velhagame.OpcoesController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="52.0" prefWidth="600.0" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="602.0" text="Tamanho do Tabuleixo (X²)">
+               <VBox.margin>
+                  <Insets top="90.0" />
+               </VBox.margin>
+            </Label>
+            <Slider fx:id="slider">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+            </Slider>
+            <Label text="" fx:id="valor">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
