@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class NavegadorController {
     public void abreMenu() throws IOException {
-        FXMLLoader loader = new FXMLLoader(MenuController.class.getResource("menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(MenuController.class.getResource("main.fxml"));
         Scene cena = new Scene(loader.load());
         VelhaGameApplication.carregaCena(cena);
     }
