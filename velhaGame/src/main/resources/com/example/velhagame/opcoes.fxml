@@ -6,9 +6,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.velhagame.OpcoesController">
    <children>
-      <fx:include source="menu.fxml" />
       <VBox prefHeight="400.0" prefWidth="600.0">
          <children>
+            <fx:include source="navegador.fxml" />
             <HBox prefHeight="52.0" prefWidth="600.0" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="602.0" text="Tamanho do Tabuleixo (X²)">
                <VBox.margin>
