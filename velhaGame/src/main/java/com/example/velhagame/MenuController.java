@@ -13,6 +13,8 @@ public class MenuController {
     private void abrirInicial() throws IOException{
         FXMLLoader loader = new FXMLLoader(MenuController.class.getResource("jogo.fxml"));
         Scene cena = new Scene(loader.load());
+        JogoController controller = loader.getController();
+        controller.change();
         VelhaGameApplication.carregaCena(cena);
     };
 

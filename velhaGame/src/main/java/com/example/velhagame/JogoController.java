@@ -21,15 +21,16 @@ import static java.lang.Integer.parseInt;
 public class JogoController {
     @FXML
     public GridPane tabuleiro;
-    public TextField teste;
 
-    public void change() {
-        float tableN = parseFloat(teste.getText());
-        double sizeC = (1/tableN) * tabuleiro.getWidth();
-        double sizeR = (1/tableN) * tabuleiro.getHeight();
+    public void change(float x) {
+        //Everytime it loads jogo.fxml, table is reloaded, no need to check for reseting this table
+        //Divides the table so that every tile has the same size
+        double sizeC = (1/x) * tabuleiro.getWidth();
+        double sizeR = (1/x) * tabuleiro.getHeight();
         ColumnConstraints column = new ColumnConstraints(sizeC);
         RowConstraints row = new RowConstraints(sizeR);
-        for(int i = 0;i < (tableN - 1); i++) {
+        //Creates tiles
+        for(int i = 0;i < (x - 1); i++) {
             tabuleiro.getColumnConstraints().add(column);
             tabuleiro.getRowConstraints().add(row);
         };

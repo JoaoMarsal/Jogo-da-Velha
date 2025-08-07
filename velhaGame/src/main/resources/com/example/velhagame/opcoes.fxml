@@ -20,11 +20,16 @@
                   <Insets left="50.0" right="50.0" />
                </VBox.margin>
             </Slider>
-            <Label text="" fx:id="valor">
+            <Label fx:id="valor" text="">
                <VBox.margin>
                   <Insets left="50.0" />
                </VBox.margin>
             </Label>
+            <Button mnemonicParsing="false" text="Salvar" onAction="#salvarConfigurações">
+               <VBox.margin>
+                  <Insets left="500.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>

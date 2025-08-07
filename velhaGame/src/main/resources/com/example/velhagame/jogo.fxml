@@ -7,10 +7,10 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.velhagame.JogoController">
    <children>
-      <TextField fx:id="teste" />
       <VBox prefHeight="548.0" prefWidth="600.0">
          <children>
-           <Label alignment="CENTER" prefHeight="51.0" prefWidth="600.0" text="Jogo da Velha" textFill="#0d6f00">
+             <fx:include source="navegador.fxml"/>
+             <Label alignment="CENTER" prefHeight="51.0" prefWidth="600.0" text="Jogo da Velha" textFill="#0d6f00">
              <font>
                <Font name="Caladea" size="24.0" />
              </font>
@@ -27,6 +27,5 @@
                </VBox.margin>
             </GridPane>
          </children></VBox>
-      <Button mnemonicParsing="false" onAction="#change" text="Button" />
    </children>
 </AnchorPane>
