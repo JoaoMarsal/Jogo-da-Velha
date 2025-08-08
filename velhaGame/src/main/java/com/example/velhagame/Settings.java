@@ -1,13 +1,6 @@
 package com.example.velhagame;
 
 public class Settings {
-    private int tableSize;
-
-    public int getTableSize() {
-        return tableSize;
+    public static int tableSize = 3;
     }
 
-    public void setTableSize(int tableSize) {
-        this.tableSize = tableSize;
-    }
-}

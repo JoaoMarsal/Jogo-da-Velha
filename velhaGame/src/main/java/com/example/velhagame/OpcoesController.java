@@ -11,8 +11,6 @@ import javafx.scene.input.MouseEvent;
 import static java.lang.Integer.parseInt;
 
 public class OpcoesController {
-    Settings settings = new Settings();
-
     @FXML
     public Slider slider;
     public Label valor;
@@ -25,8 +23,7 @@ public class OpcoesController {
         });
     }
 
-
     public void salvarConfigurações() {
-        settings.setTableSize(parseInt(String.valueOf(slider.getValue())));
+        Settings.tableSize = (int) slider.getValue();
     }
 }
