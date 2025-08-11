@@ -37,5 +37,6 @@ public class JogoController {
             tabuleiro.getColumnConstraints().add(column);
             tabuleiro.getRowConstraints().add(row);
         };
+        
     }
 }
