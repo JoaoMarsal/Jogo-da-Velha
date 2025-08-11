@@ -14,6 +14,8 @@ import javafx.scene.layout.RowConstraints;
 
 import javax.swing.*;
 
+import java.util.Objects;
+
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -37,6 +39,11 @@ public class JogoController {
             tabuleiro.getColumnConstraints().add(column);
             tabuleiro.getRowConstraints().add(row);
         };
-        
-    }
+        /*
+        ImageView imgView = new ImageView("");
+        imgView.setPreserveRatio(true);
+        tabuleiro.add(imgView, 0, 0);
+        */ //Line of thought for playable game
+        }
+         */
 }
