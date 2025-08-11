@@ -17,6 +17,7 @@ public class VelhaGameApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(VelhaGameApplication.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Jogo da Velha");
+        stage.setResizable(false);
         janela = stage;
         carregaCena(scene);
     }

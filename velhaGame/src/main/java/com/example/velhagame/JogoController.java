@@ -23,14 +23,17 @@ public class JogoController {
     public GridPane tabuleiro;
 
     public void change(float x) {
+        //Deleting every tile of the board before recharging
+        tabuleiro.getColumnConstraints().clear();
+        tabuleiro.getRowConstraints().clear();
         //Everytime it loads jogo.fxml, table is reloaded, no need to check for reseting this table
         //Divides the table so that every tile has the same size
-        double sizeC = (1/x) * tabuleiro.getWidth();
-        double sizeR = (1/x) * tabuleiro.getHeight();
+        double sizeC = tabuleiro.getWidth() / x;
+        double sizeR = tabuleiro.getHeight() / x;
         ColumnConstraints column = new ColumnConstraints(sizeC);
         RowConstraints row = new RowConstraints(sizeR);
         //Creates tiles
-        for(int i = 0;i < (x - 1); i++) {
+        for(int i = 0;i < x; i++) {
             tabuleiro.getColumnConstraints().add(column);
             tabuleiro.getRowConstraints().add(row);
         };
