@@ -54,7 +54,7 @@ public class JogoController {
             for(int c = 0; c < x; c++){
                 //Creates ImageView
                 ImageView imgView = new ImageView("C:/Users/User/Desktop/Jogo-da-Velha/velhaGame/src/main/java/com/example/velhagame//imagens//quadriculado.png");
-                    //test
+                    //ImageView's are clickable
                     imgView.setOnMouseClicked(clicou -> {
                     imgView.setImage(new Image("file:C:/Users/User/Desktop/Jogo-da-Velha/velhaGame/src/main/java/com/example/velhagame/imagens/x.png"));
                 });
