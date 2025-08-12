@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.ColumnConstraints;
@@ -48,11 +49,15 @@ public class JogoController {
         //Discovering the size for every image
         double sizeC = tabuleiro.getWidth() / x;
         double sizeR = tabuleiro.getHeight() / x;
-        //Getting acess to each and every tile, this double loop does the trick
+        //Getting access to each and every tile, this double loop does the trick
         for(int l = 0; l < x; l++){
             for(int c = 0; c < x; c++){
                 //Creates ImageView
                 ImageView imgView = new ImageView("C:/Users/User/Desktop/Jogo-da-Velha/velhaGame/src/main/java/com/example/velhagame//imagens//quadriculado.png");
+                    //test
+                    imgView.setOnMouseClicked(clicou -> {
+                    imgView.setImage(new Image("file:C:/Users/User/Desktop/Jogo-da-Velha/velhaGame/src/main/java/com/example/velhagame/imagens/x.png"));
+                });
                 //Sets the size
                 imgView.setFitWidth(sizeC);
                 imgView.setFitHeight(sizeR);
