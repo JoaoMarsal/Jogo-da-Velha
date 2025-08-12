@@ -24,6 +24,9 @@ public class JogoController {
     @FXML
     public GridPane tabuleiro;
 
+
+    //Functions to prepare the board
+    //Resize the board
     public void change(float x) {
         //Deleting every tile of the board before recharging
         tabuleiro.getColumnConstraints().clear();
@@ -38,12 +41,23 @@ public class JogoController {
         for(int i = 0;i < x; i++) {
             tabuleiro.getColumnConstraints().add(column);
             tabuleiro.getRowConstraints().add(row);
-        };
-        /*
-        ImageView imgView = new ImageView("");
-        imgView.setPreserveRatio(true);
-        tabuleiro.add(imgView, 0, 0);
-        */ //Line of thought for playable game
         }
-         */
+    }
+
+    public void placeImage(float x){
+        //Discovering the size for every image
+        double sizeC = tabuleiro.getWidth() / x;
+        double sizeR = tabuleiro.getHeight() / x;
+        //Getting acess to each and every tile, this double loop does the trick
+        for(int l = 0; l < x; l++){
+            for(int c = 0; c < x; c++){
+                //Creates ImageView
+                ImageView imgView = new ImageView("C:/Users/User/Desktop/Jogo-da-Velha/velhaGame/src/main/java/com/example/velhagame//imagens//quadriculado.png");
+                //Sets the size
+                imgView.setFitWidth(sizeC);
+                imgView.setFitHeight(sizeR);
+                tabuleiro.add(imgView, c, l);
+            }
+        }
+    }
 }

@@ -16,6 +16,7 @@ public class MenuController {
         JogoController controller = loader.getController();
         VelhaGameApplication.carregaCena(cena);
         controller.change((float) Settings.tableSize);
+        controller.placeImage((float) Settings.tableSize);
     };
 
     @FXML
