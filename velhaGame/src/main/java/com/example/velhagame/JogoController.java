@@ -43,6 +43,8 @@ public class JogoController {
             tabuleiro.getColumnConstraints().add(column);
             tabuleiro.getRowConstraints().add(row);
         }
+        //Variable that keeps tracks of whose turn it is
+        Settings.turn = 0;
     }
 
     public void placeImage(float x){
@@ -53,11 +55,16 @@ public class JogoController {
         for(int l = 0; l < x; l++){
             for(int c = 0; c < x; c++){
                 //Creates ImageView
-                ImageView imgView = new ImageView("C:/Users/User/Desktop/Jogo-da-Velha/velhaGame/src/main/java/com/example/velhagame//imagens//quadriculado.png");
-                    //ImageView's are clickable
+                ImageView imgView = new ImageView("file:src/main/resources/com/example/velhagame/imagens/unused.png");                    //ImageView's are clickable
                     imgView.setOnMouseClicked(clicou -> {
-                    imgView.setImage(new Image("file:C:/Users/User/Desktop/Jogo-da-Velha/velhaGame/src/main/java/com/example/velhagame/imagens/x.png"));
-                });
+                        //turn == even -> X ; turn == odd -> O
+                            if((Settings.turn % 2) == 0){
+                                imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
+                            } else {
+                                imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
+                            }
+                            Settings.turn = Settings.turn + 1;
+                    });
                 //Sets the size
                 imgView.setFitWidth(sizeC);
                 imgView.setFitHeight(sizeR);
