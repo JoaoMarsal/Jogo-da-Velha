@@ -24,6 +24,7 @@ import static java.lang.Integer.parseInt;
 public class JogoController {
     @FXML
     public GridPane tabuleiro;
+    public Label indicador;
 
 
     //Functions to prepare the board
@@ -60,8 +61,10 @@ public class JogoController {
                         //turn == even -> X ; turn == odd -> O
                             if((Settings.turn % 2) == 0){
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
+                                indicador.setText("O");
                             } else {
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
+                                indicador.setText("X");
                             }
                             Settings.turn = Settings.turn + 1;
                     });
