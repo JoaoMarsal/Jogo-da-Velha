@@ -15,6 +15,7 @@ import javafx.scene.layout.RowConstraints;
 
 import javax.swing.*;
 
+import java.util.List;
 import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
@@ -26,6 +27,8 @@ public class JogoController {
     public GridPane tabuleiro;
     public Label indicador;
 
+    //Mapping the board into a 2D array
+    public ImageView[][] tabelaMatrix = new ImageView[Settings.tableSize][Settings.tableSize];
 
     //Functions to prepare the board
     //Resize the board
@@ -72,6 +75,7 @@ public class JogoController {
                 imgView.setFitWidth(sizeC);
                 imgView.setFitHeight(sizeR);
                 tabuleiro.add(imgView, c, l);
+
             }
         }
     }
