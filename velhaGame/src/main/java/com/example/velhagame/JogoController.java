@@ -28,7 +28,7 @@ public class JogoController {
     public Label indicador;
 
     //Mapping the board into a 2D array
-    public ImageView[][] tabelaMatrix = new ImageView[Settings.tableSize][Settings.tableSize];
+    public int[][] tabuleiroMapped = new int[Settings.tableSize][Settings.tableSize];
 
     //Functions to prepare the board
     //Resize the board
@@ -60,13 +60,18 @@ public class JogoController {
             for(int c = 0; c < x; c++){
                 //Creates ImageView
                 ImageView imgView = new ImageView("file:src/main/resources/com/example/velhagame/imagens/unused.png");                    //ImageView's are clickable
-                    imgView.setOnMouseClicked(clicou -> {
+                tabuleiroMapped[l][c] = 0; //0 is for no player on this spot
+                int finalL = l;
+                int finalC = c;
+                imgView.setOnMouseClicked(clicou -> {
                         //turn == even -> X ; turn == odd -> O
                             if((Settings.turn % 2) == 0){
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
+                                tabuleiroMapped[finalL][finalC] = 1; //1 is for O player spot
                                 indicador.setText("O");
                             } else {
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
+                                tabuleiroMapped[finalL][finalC] = 2; //2 is for X player spot
                                 indicador.setText("X");
                             }
                             Settings.turn = Settings.turn + 1;
