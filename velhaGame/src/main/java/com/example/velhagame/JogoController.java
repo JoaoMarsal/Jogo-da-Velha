@@ -67,12 +67,15 @@ public class JogoController {
                         //turn == even -> X ; turn == odd -> O
                             if((Settings.turn % 2) == 0){
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
-                                tabuleiroMapped[finalL][finalC] = 1; //1 is for O player spot
+                                tabuleiroMapped[finalL][finalC] = 1; //1 is for X player spot
                                 indicador.setText("O");
+                                System.out.println(finalL + "; " + finalC + ": xis\n");
                             } else {
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
-                                tabuleiroMapped[finalL][finalC] = 2; //2 is for X player spot
+                                tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
                                 indicador.setText("X");
+                                System.out.print(finalL + "; " + finalC + ": bola\n");
+
                             }
                             Settings.turn = Settings.turn + 1;
                     });
