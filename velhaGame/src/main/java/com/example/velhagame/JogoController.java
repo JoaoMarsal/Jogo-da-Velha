@@ -70,12 +70,13 @@ public class JogoController {
                                 tabuleiroMapped[finalL][finalC] = 1; //1 is for X player spot
                                 indicador.setText("O");
                                 System.out.println(finalL + "; " + finalC + ": xis\n");
+                                horizontal(1, finalL);
                             } else {
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
                                 tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
                                 indicador.setText("X");
                                 System.out.print(finalL + "; " + finalC + ": bola\n");
-
+                                horizontal(2, finalL);
                             }
                             Settings.turn = Settings.turn + 1;
                     });
@@ -83,8 +84,21 @@ public class JogoController {
                 imgView.setFitWidth(sizeC);
                 imgView.setFitHeight(sizeR);
                 tabuleiro.add(imgView, c, l);
-
             }
         }
     }
+
+    //Working on the tile checkers
+    public void horizontal(int player, int line){
+        int count = 0;
+        for(int j = 0; j < Settings.tableSize; j++){
+            if(tabuleiroMapped[line][j] == player){
+                count = count + 1;
+            };
+        }
+        //Checking if amount of tile's match table size
+        if(count == Settings.tableSize){
+            System.out.println("Jogador venceu");
+        }
+    };
 }
