@@ -9,12 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,7 +66,9 @@ public class JogoController {
                 int finalL = l;
                 int finalC = c;
                 imgView.setOnMouseClicked(clicou -> {
-                        //turn == even -> X ; turn == odd -> O
+                        //Checks if space empty
+                        if(tabuleiroMapped[finalL][finalC] == 0){
+                            //turn == even -> X ; turn == odd -> O
                             if((Settings.turn % 2) == 0){
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
                                 tabuleiroMapped[finalL][finalC] = 1; //1 is for X player spot
@@ -81,6 +85,7 @@ public class JogoController {
                                 vertical(2, finalC);
                             }
                             Settings.turn = Settings.turn + 1;
+                        }
                     });
                 //Sets the size
                 imgView.setFitWidth(sizeC);
