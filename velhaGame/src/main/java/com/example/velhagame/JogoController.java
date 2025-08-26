@@ -72,6 +72,8 @@ public class JogoController {
                                 System.out.println(finalL + "; " + finalC + ": xis\n");
                                 horizontal(1, finalL);
                                 vertical(1, finalC);
+                                diagonalPrincipal(1);
+                                diagonalSecundaria(1);
                             } else {
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
                                 tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
@@ -79,6 +81,8 @@ public class JogoController {
                                 System.out.print(finalL + "; " + finalC + ": bola\n");
                                 horizontal(2, finalL);
                                 vertical(2, finalC);
+                                diagonalPrincipal(2);
+                                diagonalSecundaria(2);
                             }
                             Settings.turn = Settings.turn + 1;
                     });
@@ -113,6 +117,34 @@ public class JogoController {
             };
         }
         //Checking if amount of tile's match table size
+        if(count == Settings.tableSize){
+            System.out.println("Jogador " + player + " venceu");
+        }
+    };
+
+    public void diagonalPrincipal(int player){
+        int count = 0;
+        for(int j = 0; j < Settings.tableSize; j++){
+            if(tabuleiroMapped[j][j] == player){
+                count = count + 1;
+            };
+        }
+        //Checking if amount of tile's match table size
+        if(count == Settings.tableSize){
+            System.out.println("Jogador " + player + " venceu");
+        }
+    };
+
+    public void diagonalSecundaria(int player){
+      int count = 0;
+      int column = Settings.tableSize - 1;
+      for(int j = 0; j < Settings.tableSize; j++){
+          if(tabuleiroMapped[j][column] == player){
+              count = count + 1;
+          }
+          column = column - 1;
+      }
+      //Checking if amount of tile's match table size
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
         }
