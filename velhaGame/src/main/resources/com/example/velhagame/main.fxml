@@ -20,7 +20,7 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#abrirInicial" text="Iniciar" />
                         <Button mnemonicParsing="false" text="Configurações" onAction="#abrirOpcoes"/>
-                        <Button mnemonicParsing="false" text="Créditos" />
+                        <Button mnemonicParsing="false" text="Créditos" onAction="#abrirCreditos" />
                      </children></VBox>
                   <VBox alignment="CENTER" prefHeight="317.0" prefWidth="309.0" style="-fx-border-color: red; -fx-border-width: 5;">
                      <children>

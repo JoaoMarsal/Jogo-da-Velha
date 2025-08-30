@@ -1,7 +1,9 @@
 package com.example.velhagame;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -13,10 +15,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -77,7 +81,6 @@ public class JogoController {
                                 horizontal(1, finalL);
                                 vertical(1, finalC);
                                 diagonalPrincipal(1);
-                                diagonalSecundaria(1);
                             } else {
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
                                 tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
@@ -110,6 +113,11 @@ public class JogoController {
         //Checking if amount of tile's match table size
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
+            try {
+                abrirCreditos(player);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     };
 
@@ -124,6 +132,11 @@ public class JogoController {
         //Checking if amount of tile's match table size
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
+            try {
+                abrirCreditos(player);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     };
 
@@ -137,6 +150,11 @@ public class JogoController {
         //Checking if amount of tile's match table size
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
+            try {
+                abrirCreditos(player);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     };
 
@@ -152,6 +170,20 @@ public class JogoController {
       //Checking if amount of tile's match table size
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
+            try {
+                abrirCreditos(player);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     };
+
+    //Showing propper "you won" screen
+    private void abrirCreditos(int player) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("winner.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
