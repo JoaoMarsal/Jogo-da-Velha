@@ -2,30 +2,17 @@ package com.example.velhagame;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 
-import static java.lang.Double.parseDouble;
-import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class JogoController {
@@ -114,7 +101,7 @@ public class JogoController {
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
             try {
-                abrirCreditos(player);
+                winnerAlert(player);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -133,7 +120,7 @@ public class JogoController {
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
             try {
-                abrirCreditos(player);
+                winnerAlert(player);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -151,7 +138,7 @@ public class JogoController {
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
             try {
-                abrirCreditos(player);
+                winnerAlert(player);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -171,18 +158,24 @@ public class JogoController {
         if(count == Settings.tableSize){
             System.out.println("Jogador " + player + " venceu");
             try {
-                abrirCreditos(player);
+                winnerAlert(player);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
     };
 
+    static Stage stage = new Stage();
     //Showing propper "you won" screen
-    private void abrirCreditos(int player) throws IOException {
+    private void winnerAlert(int player) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("winner.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load(), 300, 200);
+        WinnerController controller = loader.getController();
+        if(player == 1){
+            controller.alterText(1);
+        } else if(player == 2){
+            controller.alterText(2);
+        }
         stage.setScene(scene);
         stage.show();
     }
