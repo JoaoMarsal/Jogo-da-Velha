@@ -68,6 +68,7 @@ public class JogoController {
                                 horizontal(1, finalL);
                                 vertical(1, finalC);
                                 diagonalPrincipal(1);
+                                diagonalSecundaria(1);
                             } else {
                                 imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
                                 tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
