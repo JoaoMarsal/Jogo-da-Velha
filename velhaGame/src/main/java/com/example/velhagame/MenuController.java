@@ -26,7 +26,7 @@ public class MenuController {
         FXMLLoader loader = new FXMLLoader(MenuController.class.getResource("opcoes.fxml"));
         Scene cena = new Scene(loader.load());
         OpcoesController controller = loader.getController();
-        controller.carregaSlider(3, 40);
+        controller.carregaSlider(3, 15);
         VelhaGameApplication.carregaCena(cena);
     }
 
