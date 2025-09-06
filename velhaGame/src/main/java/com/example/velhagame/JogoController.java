@@ -12,6 +12,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Set;
 
 import static java.lang.Integer.parseInt;
 
@@ -36,7 +37,7 @@ public class JogoController {
         ColumnConstraints column = new ColumnConstraints(sizeC);
         RowConstraints row = new RowConstraints(sizeR);
         //Creates tiles
-        for(int i = 0;i < x; i++) {
+        for (int i = 0; i < x; i++) {
             tabuleiro.getColumnConstraints().add(column);
             tabuleiro.getRowConstraints().add(row);
         }
@@ -44,62 +45,67 @@ public class JogoController {
         Settings.turn = 0;
     }
 
-    public void placeImage(float x){
+    public void placeImage(float x) {
         //Discovering the size for every image
         double sizeC = tabuleiro.getWidth() / x;
         double sizeR = tabuleiro.getHeight() / x;
         //Getting access to each and every tile, this double loop does the trick
-        for(int l = 0; l < x; l++){
-            for(int c = 0; c < x; c++){
+        for (int l = 0; l < x; l++) {
+            for (int c = 0; c < x; c++) {
                 //Creates ImageView
                 ImageView imgView = new ImageView("file:src/main/resources/com/example/velhagame/imagens/unused.png");                    //ImageView's are clickable
                 tabuleiroMapped[l][c] = 0; //0 is for no player on this spot
                 int finalL = l;
                 int finalC = c;
                 imgView.setOnMouseClicked(clicou -> {
-                        //Checks if space empty
-                        if(tabuleiroMapped[finalL][finalC] == 0){
-                            //turn == even -> X ; turn == odd -> O
-                            if((Settings.turn % 2) == 0){
-                                imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
-                                tabuleiroMapped[finalL][finalC] = 1; //1 is for X player spot
-                                indicador.setText("O");
-                                System.out.println(finalL + "; " + finalC + ": xis\n");
-                                horizontal(1, finalL);
-                                vertical(1, finalC);
-                                diagonalPrincipal(1);
-                                diagonalSecundaria(1);
-                            } else {
-                                imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
-                                tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
-                                indicador.setText("X");
-                                System.out.print(finalL + "; " + finalC + ": bola\n");
-                                horizontal(2, finalL);
-                                vertical(2, finalC);
-                                diagonalPrincipal(2);
-                                diagonalSecundaria(2);
-                            }
-                            Settings.turn = Settings.turn + 1;
+                    //Checks if space empty
+                    if (tabuleiroMapped[finalL][finalC] == 0) {
+                        //turn == even -> X ; turn == odd -> O
+                        if ((Settings.turn % 2) == 0) {
+                            imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
+                            tabuleiroMapped[finalL][finalC] = 1; //1 is for X player spot
+                            indicador.setText("O");
+                            System.out.println(finalL + "; " + finalC + ": xis\n");
+                            horizontal(1, finalL);
+                            vertical(1, finalC);
+                            diagonalPrincipal(1);
+                            diagonalSecundaria(1);
+                            searchTie(1, finalC, finalL);
+                        } else {
+                            imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
+                            tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
+                            indicador.setText("X");
+                            System.out.print(finalL + "; " + finalC + ": bola\n");
+                            horizontal(2, finalL);
+                            vertical(2, finalC);
+                            diagonalPrincipal(2);
+                            diagonalSecundaria(2);
+                            searchTie(2, finalC, finalL);
                         }
-                    });
+                        Settings.turn = Settings.turn + 1;
+                    }
+                });
                 //Sets the size
                 imgView.setFitWidth(sizeC);
                 imgView.setFitHeight(sizeR);
                 tabuleiro.add(imgView, c, l);
             }
         }
-    };
+    }
+
+    ;
 
     //Working on the tile checkers
-    public void horizontal(int player, int line){
+    public void horizontal(int player, int line) {
         int count = 0;
-        for(int j = 0; j < Settings.tableSize; j++){
-            if(tabuleiroMapped[line][j] == player){
+        for (int j = 0; j < Settings.tableSize; j++) {
+            if (tabuleiroMapped[line][j] == player) {
                 count = count + 1;
-            };
+            }
+            ;
         }
         //Checking if amount of tile's match table size
-        if(count == Settings.tableSize){
+        if (count == Settings.tableSize) {
             System.out.println("Jogador " + player + " venceu");
             try {
                 winnerAlert(player);
@@ -107,18 +113,21 @@ public class JogoController {
                 throw new RuntimeException(e);
             }
         }
-    };
+    }
+
+    ;
 
     //Working on the tile checkers
-    public void vertical(int player, int column){
+    public void vertical(int player, int column) {
         int count = 0;
-        for(int j = 0; j < Settings.tableSize; j++){
-            if(tabuleiroMapped[j][column] == player){
+        for (int j = 0; j < Settings.tableSize; j++) {
+            if (tabuleiroMapped[j][column] == player) {
                 count = count + 1;
-            };
+            }
+            ;
         }
         //Checking if amount of tile's match table size
-        if(count == Settings.tableSize){
+        if (count == Settings.tableSize) {
             System.out.println("Jogador " + player + " venceu");
             try {
                 winnerAlert(player);
@@ -126,17 +135,20 @@ public class JogoController {
                 throw new RuntimeException(e);
             }
         }
-    };
+    }
 
-    public void diagonalPrincipal(int player){
+    ;
+
+    public void diagonalPrincipal(int player) {
         int count = 0;
-        for(int j = 0; j < Settings.tableSize; j++){
-            if(tabuleiroMapped[j][j] == player){
+        for (int j = 0; j < Settings.tableSize; j++) {
+            if (tabuleiroMapped[j][j] == player) {
                 count = count + 1;
-            };
+            }
+            ;
         }
         //Checking if amount of tile's match table size
-        if(count == Settings.tableSize){
+        if (count == Settings.tableSize) {
             System.out.println("Jogador " + player + " venceu");
             try {
                 winnerAlert(player);
@@ -144,19 +156,21 @@ public class JogoController {
                 throw new RuntimeException(e);
             }
         }
-    };
+    }
 
-    public void diagonalSecundaria(int player){
-      int count = 0;
-      int column = Settings.tableSize - 1;
-      for(int j = 0; j < Settings.tableSize; j++){
-          if(tabuleiroMapped[j][column] == player){
-              count = count + 1;
-          }
-          column = column - 1;
-      }
-      //Checking if amount of tile's match table size
-        if(count == Settings.tableSize){
+    ;
+
+    public void diagonalSecundaria(int player) {
+        int count = 0;
+        int column = Settings.tableSize - 1;
+        for (int j = 0; j < Settings.tableSize; j++) {
+            if (tabuleiroMapped[j][column] == player) {
+                count = count + 1;
+            }
+            column = column - 1;
+        }
+        //Checking if amount of tile's match table size
+        if (count == Settings.tableSize) {
             System.out.println("Jogador " + player + " venceu");
             try {
                 winnerAlert(player);
@@ -164,20 +178,66 @@ public class JogoController {
                 throw new RuntimeException(e);
             }
         }
-    };
+    }
+
+    ;
 
     static Stage stage = new Stage();
+
     //Showing propper "you won" screen
     private void winnerAlert(int player) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("winner.fxml"));
         Scene scene = new Scene(loader.load(), 300, 200);
         WinnerController controller = loader.getController();
-        if(player == 1){
+        if (player == 1) {
             controller.alterText(1);
-        } else if(player == 2){
+        } else if (player == 2) {
             controller.alterText(2);
         }
         stage.setScene(scene);
         stage.show();
+    }
+
+    //Looking for a possible tie, go onto a function that will check after every move for a possible tie
+    private void searchTie(int player, int finalC, int finalL) {
+        //Firstly, we figure out a possible amount of winning scenarios
+        int nCases = 2 * (Settings.tableSize) + 2;
+        //Now, checking for the diagonal cases
+        int holdTrue = 0; //This helps on boolean operations
+        for (int j = 0; j < Settings.tableSize; j++) {
+            if (tabuleiroMapped[j][j] != player && tabuleiroMapped[j][j] != 0) {
+                nCases = nCases - 1;
+                break;
+            }
+        }
+        int column = Settings.tableSize - 1;
+        for (int j = 0; j < Settings.tableSize; j++) {
+            if (tabuleiroMapped[j][column] != player && tabuleiroMapped[j][column] != 0) {
+                nCases = nCases - 1;
+                break;
+            }
+            column = column - 1;
+        }
+        //Now, we test for simple cases, the lines and columns
+        for(int j = 0; j<Settings.tableSize; j++){
+            for(int i = 0; i < Settings.tableSize; i++) {
+                if (tabuleiroMapped[j][i] != player && tabuleiroMapped[j][i] != 0) {
+                    nCases = nCases - 1;
+                    break;
+                }
+            }
+        }
+        for(int j = 0; j<Settings.tableSize; j++){
+            for(int i = 0; i < Settings.tableSize; i++) {
+                if (tabuleiroMapped[i][j] != player && tabuleiroMapped[i][j] != 0) {
+                    nCases = nCases - 1;
+                    break;
+                }
+            }
+        }
+        //Checking if there are still possible winning scenaries
+        if(nCases == 0){
+            System.out.println("empate");
+        }
     }
 }
