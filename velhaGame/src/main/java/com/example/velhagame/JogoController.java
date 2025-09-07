@@ -239,5 +239,7 @@ public class JogoController {
         if(nCases == 0){
             System.out.println("empate");
         }
+
+        //One way i could avail for a checkmate test, is verify if there is a place in board different of the case in question
     }
 }
