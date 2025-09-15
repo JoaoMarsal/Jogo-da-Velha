@@ -70,7 +70,7 @@ public class JogoController {
                             vertical(1, finalC);
                             diagonalPrincipal(1);
                             diagonalSecundaria(1);
-                            searchTie(1, finalC, finalL);
+                            checkForTie(2);
                         } else {
                             imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
                             tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
@@ -80,7 +80,7 @@ public class JogoController {
                             vertical(2, finalC);
                             diagonalPrincipal(2);
                             diagonalSecundaria(2);
-                            searchTie(2, finalC, finalL);
+                            checkForTie(1);
                         }
                         Settings.turn = Settings.turn + 1;
                     }
@@ -198,6 +198,7 @@ public class JogoController {
         stage.show();
     }
 
+    /*
     //Looking for a possible tie, go onto a function that will check after every move for a possible tie
     private void searchTie(int player, int finalC, int finalL) {
         //Firstly, we figure out a possible amount of winning scenarios
@@ -241,5 +242,85 @@ public class JogoController {
         }
 
         //One way i could avail for a checkmate test, is verify if there is a place in board different of the case in question
+    }
+     */
+
+    //Alternative on checking for tie
+    //This function is an experiment on a minimaxing strategy to validate ties
+
+    private void checkForTie(int nextPlayer) {
+        /*
+        Firstly, to use the minimax strategy, the program would need to keep track of all possible
+        places the next player can put his piece
+        */
+        boolean holdBool = false;
+        for(int i = 0; i < Settings.tableSize; i++){
+            for(int j = 0; j < Settings.tableSize; j++){
+                //This double loop will do the trick to check for all places
+                if(tabuleiroMapped[i][j] == 0){
+                //This will point to an empty place the game can be played
+                    tabuleiroMapped[i][j] = nextPlayer; //The place is now taken for the next player
+                    //Here, a function for checking the whole possible next board is needed
+                    holdBool = !checkBoard();
+                    tabuleiroMapped[i][j] = 0;
+                }
+            }
+        }
+        if(!holdBool){
+            System.out.println("Empate\n");
+        }
+    }
+
+    private boolean checkBoard() {
+        //Amount of possible wins
+        int nWins = (Settings.tableSize * 2) + 2;
+        //Checking ties horizontally
+        int holdFor = 0;
+        for(int i = 0; i < Settings.tableSize; i++){
+            holdFor = 0;
+            for(int j = 1; j < Settings.tableSize; j++){
+                if(holdFor == 0){
+                    holdFor = tabuleiroMapped[i][j];
+                }
+                if(tabuleiroMapped[i][j] != tabuleiroMapped[i][j - 1]){
+                    nWins = nWins - 1;
+                    break;
+                }
+            }
+        }
+        holdFor = 0;
+        for(int i = 0; i < Settings.tableSize; i++){
+            holdFor = 0;
+            for(int j = 1; j < Settings.tableSize; j++){
+                if(holdFor == 0){
+                    holdFor = tabuleiroMapped[j][i];
+                }
+                if(tabuleiroMapped[j][i] != tabuleiroMapped[j - 1][i]){
+                    nWins = nWins - 1;
+                    break;
+                }
+            }
+        }
+        holdFor = 0;
+        for(int i = 1; i < Settings.tableSize; i++){
+            if(holdFor == 0){
+                holdFor = tabuleiroMapped[i][i];
+            }
+            if(tabuleiroMapped[i][i] == tabuleiroMapped[i - 1][i - 1]){
+                nWins = nWins - 1;
+                break;
+            }
+        }
+        holdFor = 0;
+        for(int i = 0; i < Settings.tableSize; i++){
+            if(holdFor == 0){
+                holdFor = tabuleiroMapped[i][Settings.tableSize - i];
+            }
+            if(tabuleiroMapped[i][Settings.tableSize - i] == tabuleiroMapped[i + 1][Settings.tableSize - (i - 1)]){
+                nWins = nWins - 1;
+                break;
+            }
+        }
+        return nWins != 0;
     }
 }
