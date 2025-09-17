@@ -272,55 +272,12 @@ public class JogoController {
     }
 
     private boolean checkBoard() {
-        //Amount of possible wins
-        int nWins = (Settings.tableSize * 2) + 2;
-        //Checking ties horizontally
-        int holdFor = 0;
-        for(int i = 0; i < Settings.tableSize; i++){
-            holdFor = 0;
-            for(int j = 1; j < Settings.tableSize; j++){
-                if(holdFor == 0){
-                    holdFor = tabuleiroMapped[i][j];
-                }
-                if(tabuleiroMapped[i][j] != tabuleiroMapped[i][j - 1]){
-                    nWins = nWins - 1;
-                    break;
-                }
+        //This is a boolean that starts as false, if it finds a possible win, it changes to true and breaks
+        boolean winPossible = false;
+        for(int j = 0; j < Settings.tableSize; j++){
+            for(int i = 0; i < Settings.tableSize; i++){
+                
             }
         }
-        holdFor = 0;
-        for(int i = 0; i < Settings.tableSize; i++){
-            holdFor = 0;
-            for(int j = 1; j < Settings.tableSize; j++){
-                if(holdFor == 0){
-                    holdFor = tabuleiroMapped[j][i];
-                }
-                if(tabuleiroMapped[j][i] != tabuleiroMapped[j - 1][i]){
-                    nWins = nWins - 1;
-                    break;
-                }
-            }
-        }
-        holdFor = 0;
-        for(int i = 1; i < Settings.tableSize; i++){
-            if(holdFor == 0){
-                holdFor = tabuleiroMapped[i][i];
-            }
-            if(tabuleiroMapped[i][i] == tabuleiroMapped[i - 1][i - 1]){
-                nWins = nWins - 1;
-                break;
-            }
-        }
-        holdFor = 0;
-        for(int i = 0; i < Settings.tableSize; i++){
-            if(holdFor == 0){
-                holdFor = tabuleiroMapped[i][Settings.tableSize - i];
-            }
-            if(tabuleiroMapped[i][Settings.tableSize - i] == tabuleiroMapped[i + 1][Settings.tableSize - (i - 1)]){
-                nWins = nWins - 1;
-                break;
-            }
-        }
-        return nWins != 0;
     }
 }
