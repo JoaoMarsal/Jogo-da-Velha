@@ -261,7 +261,9 @@ public class JogoController {
                 //This will point to an empty place the game can be played
                     tabuleiroMapped[i][j] = nextPlayer; //The place is now taken for the next player
                     //Here, a function for checking the whole possible next board is needed
-                    holdBool = !checkBoard();
+                    if(holdBool == false) {
+                        holdBool = checkBoard();
+                    }
                     tabuleiroMapped[i][j] = 0;
                 }
             }
@@ -274,10 +276,34 @@ public class JogoController {
     private boolean checkBoard() {
         //This is a boolean that starts as false, if it finds a possible win, it changes to true and breaks
         boolean winPossible = false;
+        int hold = 0;
         for(int j = 0; j < Settings.tableSize; j++){
             for(int i = 0; i < Settings.tableSize; i++){
-                
+                if(hold == 0 && tabuleiroMapped[j][i] != 0){
+                    hold = tabuleiroMapped[j][i];
+                }
+                if(tabuleiroMapped[j][i] != hold && tabuleiroMapped[j][i] != 0){
+                    break;
+                } else if(i == (Settings.tableSize - 1)){
+                    winPossible = true;
+                    return winPossible;
+                }
             }
         }
+        hold = 0;
+        for(int j = 0; j < Settings.tableSize; j++){
+            for(int i = 0; i < Settings.tableSize; i++){
+                if(hold == 0 && tabuleiroMapped[i][j] != 0){
+                    hold = tabuleiroMapped[i][j];
+                }
+                if(tabuleiroMapped[i][j] != hold && tabuleiroMapped[i][j] != 0){
+                    break;
+                } else if(j == (Settings.tableSize - 1)){
+                    winPossible = true;
+                    return winPossible;
+                }
+            }
+        }
+        return false;
     }
 }
