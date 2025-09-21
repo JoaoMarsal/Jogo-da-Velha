@@ -198,53 +198,6 @@ public class JogoController {
         stage.show();
     }
 
-    /*
-    //Looking for a possible tie, go onto a function that will check after every move for a possible tie
-    private void searchTie(int player, int finalC, int finalL) {
-        //Firstly, we figure out a possible amount of winning scenarios
-        int nCases = 2 * (Settings.tableSize) + 2;
-        //Now, checking for the diagonal cases
-        int holdTrue = 0; //This helps on boolean operations
-        for (int j = 0; j < Settings.tableSize; j++) {
-            if (tabuleiroMapped[j][j] != player && tabuleiroMapped[j][j] != 0) {
-                nCases = nCases - 1;
-                break;
-            }
-        }
-        int column = Settings.tableSize - 1;
-        for (int j = 0; j < Settings.tableSize; j++) {
-            if (tabuleiroMapped[j][column] != player && tabuleiroMapped[j][column] != 0) {
-                nCases = nCases - 1;
-                break;
-            }
-            column = column - 1;
-        }
-        //Now, we test for simple cases, the lines and columns
-        for(int j = 0; j<Settings.tableSize; j++){
-            for(int i = 0; i < Settings.tableSize; i++) {
-                if (tabuleiroMapped[j][i] != player && tabuleiroMapped[j][i] != 0) {
-                    nCases = nCases - 1;
-                    break;
-                }
-            }
-        }
-        for(int j = 0; j<Settings.tableSize; j++){
-            for(int i = 0; i < Settings.tableSize; i++) {
-                if (tabuleiroMapped[i][j] != player && tabuleiroMapped[i][j] != 0) {
-                    nCases = nCases - 1;
-                    break;
-                }
-            }
-        }
-        //Checking if there are still possible winning scenaries
-        if(nCases == 0){
-            System.out.println("empate");
-        }
-
-        //One way i could avail for a checkmate test, is verify if there is a place in board different of the case in question
-    }
-     */
-
     //Alternative on checking for tie
     //This function is an experiment on a minimaxing strategy to validate ties
 
@@ -261,23 +214,32 @@ public class JogoController {
                 //This will point to an empty place the game can be played
                     tabuleiroMapped[i][j] = nextPlayer; //The place is now taken for the next player
                     //Here, a function for checking the whole possible next board is needed
-                    if(holdBool == false) {
+                    if(!holdBool) {
                         holdBool = checkBoard();
                     }
                     tabuleiroMapped[i][j] = 0;
                 }
+                if(holdBool){
+                    break;
+                }
+            }
+            if(holdBool){
+                break;
             }
         }
         if(!holdBool){
             System.out.println("Empate\n");
+        }  else {
+            System.out.println("Ainda pode ganhar\n");
         }
     }
 
     private boolean checkBoard() {
         //This is a boolean that starts as false, if it finds a possible win, it changes to true and breaks
         boolean winPossible = false;
-        int hold = 0;
+        int hold;
         for(int j = 0; j < Settings.tableSize; j++){
+            hold = 0;
             for(int i = 0; i < Settings.tableSize; i++){
                 if(hold == 0 && tabuleiroMapped[j][i] != 0){
                     hold = tabuleiroMapped[j][i];
@@ -290,20 +252,42 @@ public class JogoController {
                 }
             }
         }
-        hold = 0;
         for(int j = 0; j < Settings.tableSize; j++){
+            hold = 0;
             for(int i = 0; i < Settings.tableSize; i++){
                 if(hold == 0 && tabuleiroMapped[i][j] != 0){
                     hold = tabuleiroMapped[i][j];
                 }
                 if(tabuleiroMapped[i][j] != hold && tabuleiroMapped[i][j] != 0){
                     break;
-                } else if(j == (Settings.tableSize - 1)){
+                } else if(i == (Settings.tableSize - 1)){
                     winPossible = true;
                     return winPossible;
                 }
             }
         }
-        return false;
+        hold = 0;
+        for(int j = 0; j < Settings.tableSize; j++){
+            if(hold == 0 && tabuleiroMapped[j][j] != 0){
+                hold = tabuleiroMapped[j][j];
+            } else if(tabuleiroMapped[j][j] != hold && tabuleiroMapped[j][j] != 0){
+                break;
+            } else if(j == Settings.tableSize - 1){
+                winPossible = true;
+                return winPossible;
+            }
+        }
+        hold = 0;
+        for(int j = 0; j < Settings.tableSize; j++){
+            if(hold == 0 && tabuleiroMapped[j][(Settings.tableSize - 1 - j)] != 0){
+                hold = tabuleiroMapped[j][Settings.tableSize - 1 - j];
+            } else if(tabuleiroMapped[j][Settings.tableSize - 1 - j] != hold && tabuleiroMapped[j][(Settings.tableSize - 1 - j)] != 0){
+                break;
+            } else if(j == Settings.tableSize - 1){
+                winPossible = true;
+                return winPossible;
+            }
+        }
+        return winPossible;
     }
 }
