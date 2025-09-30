@@ -197,6 +197,13 @@ public class JogoController {
         stage.setScene(scene);
         stage.show();
     }
+    //Showing propper tie screen
+    private void tieAlert() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("tie.fxml"));
+        Scene scene = new Scene(loader.load(), 300, 200);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     //Alternative on checking for tie
     //This function is an experiment on a minimaxing strategy to validate ties
@@ -229,6 +236,11 @@ public class JogoController {
         }
         if(!holdBool){
             System.out.println("Empate\n");
+            try {
+                tieAlert();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }  else {
             System.out.println("Ainda pode ganhar\n");
         }
