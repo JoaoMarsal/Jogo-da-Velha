@@ -53,7 +53,9 @@ public class JogoController {
         for (int l = 0; l < x; l++) {
             for (int c = 0; c < x; c++) {
                 //Creates ImageView
-                ImageView imgView = new ImageView("file:src/main/resources/com/example/velhagame/imagens/unused.png");                    //ImageView's are clickable
+                ImageView imgView = new ImageView(getClass().getResource(
+                        "/com/example/velhagame/imagens/unused.png"
+                ).toExternalForm());                    //ImageView's are clickable
                 tabuleiroMapped[l][c] = 0; //0 is for no player on this spot
                 int finalL = l;
                 int finalC = c;
@@ -62,7 +64,9 @@ public class JogoController {
                     if (tabuleiroMapped[finalL][finalC] == 0) {
                         //turn == even -> X ; turn == odd -> O
                         if ((Settings.turn % 2) == 0) {
-                            imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-X.png"));
+                            imgView.setImage(new Image(getClass().getResource(
+                                    "/com/example/velhagame/imagens/used-X.png"
+                            ).toExternalForm()));
                             tabuleiroMapped[finalL][finalC] = 1; //1 is for X player spot
                             indicador.setText("O");
                             System.out.println(finalL + "; " + finalC + ": xis\n");
@@ -72,7 +76,9 @@ public class JogoController {
                             diagonalSecundaria(1);
                             checkForTie(2);
                         } else {
-                            imgView.setImage(new Image("file:src/main/resources/com/example/velhagame/imagens/used-O.png"));
+                            imgView.setImage(new Image(getClass().getResource(
+                                    "/com/example/velhagame/imagens/used-O.png"
+                            ).toExternalForm()));
                             tabuleiroMapped[finalL][finalC] = 2; //2 is for O player spot
                             indicador.setText("X");
                             System.out.print(finalL + "; " + finalC + ": bola\n");

@@ -19,8 +19,14 @@ public class WinnerController {
     public void alterText(int player){
         if(player == 1){
             jogador.setText("X");
+            gif.setImage(new Image(getClass().getResource(
+                    "/com/example/velhagame/imagens/XWon.gif"
+            ).toExternalForm()));
         } else if(player == 2){
             jogador.setText("O");
+            gif.setImage(new Image(getClass().getResource(
+                    "/com/example/velhagame/imagens/OWon.gif"
+            ).toExternalForm()));
         }
     }
 
